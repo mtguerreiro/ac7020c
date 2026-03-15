@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?> 
+
+<!-- General board description: vendor, name, etc. -->
+<board schema_version="2.1" vendor="en.alinx.com" name="ac7020c" display_name="AC7020C Development Board" url="https://www.en.alinx.com/Product/SoC-System-on-Modules/Zynq-7000-SoC/AC7020C.html" preset_file="preset.xml">
+
+  <!-- Image of the board -->
+  <images>
+    <image name="ac7020c.jpg" display_name="AC7020C Development Board" sub_type="board">
+      <description>AC7020C Development Board</description>
+    </image>
+  </images>
+
+  <!-- Board PCB revision -->
+  <compatible_board_revisions>
+    <revision id="1">1.0</revision>
+    </compatible_board_revisions>
+
+  <!-- Board file revision -->
+  <file_version>1.0</file_version>
+
+  <description> The AC7020C features the XC7Z020CLG400-2 with 1 GB DDR3 memory, 64 MB QSPI flash, Gigabit Ethernet, USB2.0 HOST , USB OTG, USB UART, and 102 user IOs. </description>
+
+  <!-- Information about board components: fpga part, interfaces, etc. -->
+  <components>
+
+    <!-- FPGA part -->
+    <component name="part0" display_name="ac7020c" type="fpga" part_name="xc7z020clg400-2" pin_map_file="part0_pins.xml" vendor="xilinx" spec_url="https://www.en.alinx.com/Product/SoC-System-on-Modules/Zynq-7000-SoC/AC7020C.html">
+
+      <!-- Associated FPGA interfaces and IP cores -->
+      <interfaces>
+
+        <!-- Zynq 7000 processing system -->
+        <interface mode="master" name="ps7_fixedio" type="xilinx.com:display_processing_system7:fixedio_rtl:1.0" of_component="ps7_fixedio" preset_proc="ps7_preset">
+          <preferred_ips>
+            <preferred_ip vendor="xilinx.com" library="ip" name="processing_system7" order="0"/>
+          </preferred_ips>
+        </interface>
+
+        <!-- PL LED -->
+        <interface mode="master" name="led_pl" type="xilinx.com:interface:gpio_rtl:1.0" of_component="led_pl" preset_proc="led_pl_preset">
+          <preferred_ips>
+            <preferred_ip vendor="xilinx.com" library="ip" name="axi_gpio" order="0"/>
+          </preferred_ips>
+          <port_maps>
+            <port_map logical_port="TRI_O" physical_port="led_pl_tri_o" dir="out">
+              <pin_maps>
+                <pin_map port_index="0" component_pin="led_pl_tri_o_0"/>
+              </pin_maps>
+            </port_map>
+          </port_maps>
+        </interface>
+
+        <!-- Board oscillator -->
+        <interface mode="slave" name="sys_clock" type="xilinx.com:signal:clock_rtl:1.0" of_component="sys_clock" preset_proc="sys_clock_preset">
+          <port_maps>
+            <port_map logical_port="CLK" physical_port="sys_clk" dir="in">
+              <pin_maps>
+                <pin_map port_index="0" component_pin="sys_clk"/>
+              </pin_maps>
+            </port_map>
+          </port_maps>
+          <parameters>
+            <parameter name="frequency" value="50000000" />
+          </parameters>
+        </interface>
+
+      </interfaces>
+    </component>
+
+    <!-- Zynq 7000 processing system -->
+    <component name="ps7_fixedio" display_name="PS7 fixed IO" type="chip" sub_type="fixed_io" major_group=""/>
+
+    <!-- PL LED -->
+    <component name="led_pl" display_name="PL LED" type="chip" sub_type="led" major_group="General Purpose Input or Output">
+      <description>PL LED, active low</description>
+    </component>
+
+    <!-- Board clock -->
+    <component name="sys_clock" display_name="System Clock" type="chip" sub_type="system_clock" major_group="Clocks">
+      <description>50 MHz oscillator connected to PL MRCC pin</description>
+    </component>
+
+  </components>
+
+  <!-- Board jtag chains for all fpga parts -->
+  <jtag_chains>
+
+    <!-- Board jtag chains for part0 -->
+    <jtag_chain name="chain1">
+      <position name="0" component="part0"/>
+    </jtag_chain>
+
+  </jtag_chains>
+
+  <!-- Connections between component interfaces and physical pins described in part0_pins.xml -->
+  <connections>
+
+    <!-- Board clock -->
+    <connection name="part0_sys_clock" component1="part0" component2="sys_clock">
+      <connection_map name="part0_sys_clock_1" c1_st_index="0" c1_end_index="0" c2_st_index="0" c2_end_index="0"/>
+    </connection>
+
+    <!-- PL LED -->
+    <connection name="part0_led_pl" component1="part0" component2="led_pl">
+      <connection_map name="part0_led_pl_1" c1_st_index="1" c1_end_index="1" c2_st_index="0" c2_end_index="0"/>
+    </connection>
+
+
+  </connections>
+
+</board>
