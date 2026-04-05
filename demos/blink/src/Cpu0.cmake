@@ -1,0 +1,2 @@
+
+set(USER_COMPILE_SOURCES "${BLINK_SRC}/blink.c")

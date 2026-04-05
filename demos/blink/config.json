@@ -1,0 +1,15 @@
+{
+  "xsa": "blink.xsa",
+  "plat_name": "blink",
+  "cpu0":{
+    "name": "cpu0_app",
+    "template": "hello_world",
+    "os": "standalone",
+    "cmake":{
+      "path_vars":{
+        "BLINK_SRC": "src/"
+      },
+      "include": "${BLINK_SRC}/Cpu0.cmake"
+    }
+  }
+}

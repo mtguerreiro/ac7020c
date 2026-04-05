@@ -25,9 +25,9 @@ Vitis
 
 To create and build the Vitis project, start Vitis in the shell mode (by running `vitis -i`) and then run
 ```sh
-run path/plat_create_build.py --ws path/ws --xsa /path/plat.xsa
+run path/plat_create_build.py --ws path/ws --config path/to/config.json
 ```
 where
 - `path/plat_create_build.py`: the `plat_create_build.py` script in the submodule  `xil_z7_scripts/vitis`.
 - `ws`: location to create Vitis project.
-- `xsa`: the XSA file.
+- `config`: the json file with the settings for the project.
