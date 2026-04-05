@@ -7,7 +7,7 @@
     "os": "standalone",
     "cmake":{
       "path_vars":{
-        "BLINK_SRC": "src/"
+        "BLINK_SRC": "src"
       },
       "include": "${BLINK_SRC}/Cpu0.cmake"
     }

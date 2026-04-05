@@ -134,7 +134,6 @@ set(USER_LINK_OTHER_FLAGS
 
 # -----------------------------------------
 
-this goes above
 ###   END OF USER SETTINGS SECTION ###
 ###   DO NOT EDIT BEYOND THIS LINE ###
 

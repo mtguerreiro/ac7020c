@@ -1,0 +1,31 @@
+{
+  "xsa": "blink.xsa",
+  "plat_name": "tcp_echo",
+  "cpu0":{
+    "name": "cpu0_app",
+    "template": "empty_application",
+    "os": "freertos",
+    "cmake":{
+      "config": "src/UserConfigCpu0.cmake",
+      "path_vars":{
+        "TCP_SERVER_ECHO_SRC": "src",
+        "AC7020C_COMMON_TASKS": "../../common/tasks",
+        "AC7020C_EXT_LIBS": "../../libs"
+      },
+      "include": "${TCP_SERVER_ECHO_SRC}/Cpu0.cmake"
+    },
+    "options":{
+      "os":{
+        "freertos_total_heap_size": 65536
+        },
+      "lib":{
+        "lwip220":{
+          "lwip220_api_mode": "SOCKET_API",
+          "lwip220_dhcp": "true",
+          "lwip220_lwip_dhcp_does_acd_check": "true",
+          "lwip220_pbuf_pool_size": 2048
+        }
+      }
+    }
+  }
+}

@@ -6,10 +6,13 @@
 
 /* Tasks */
 #include "blink.h"
+#include "netinit.h"
 
 /* Kernal */
 #include "FreeRTOS.h"
 #include "task.h"
+
+#include "netif/xadapter.h"
 //=============================================================================
 
 //=============================================================================
@@ -18,13 +21,18 @@
 //-----------------------------------------------------------------------------
 int main(void){
 
-    xTaskCreate(
-        blink,
-        "blink_thrd",
+    sys_thread_new(
+        "blink_thrd", blink,
+        0,
         BLINK_CONFIG_TASK_STACK_SIZE,
-        NULL,
-        BLINK_CONFIG_TASK_PRIO,
-        NULL
+        BLINK_CONFIG_TASK_PRIO
+    );
+
+    sys_thread_new(
+        "netinit", netinit,
+        0,
+        NETINIT_CONFIG_TASK_STACK_SIZE,
+        NETINIT_CONFIG_TASK_PRIO
     );
 
     vTaskStartScheduler();
