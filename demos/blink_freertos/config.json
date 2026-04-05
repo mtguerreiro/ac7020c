@@ -4,12 +4,16 @@
   "cpu0":{
     "name": "cpu0_app",
     "template": "empty_application",
-    "os": "standalone",
+    "os": "freertos",
     "cmake":{
       "path_vars":{
-        "BLINK_SRC": "src/"
+        "BLINK_SRC": "src/",
+        "AC7020C_COMMON_TASKS": "../../common/tasks"
       },
       "include": "${BLINK_SRC}/Cpu0.cmake"
+    },
+    "options":{
+      "os":{"freertos_total_heap_size": 65536}
     }
   }
 }
