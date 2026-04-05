@@ -1,3 +1,6 @@
 [submodule "xil_z7_scripts"]
 	path = xil_z7_scripts
 	url = https://github.com/mtguerreiro/xil_z7_scripts
+[submodule "libs/clogging"]
+	path = libs/clogging
+	url = https://github.com/mtguerreiro/clogging
