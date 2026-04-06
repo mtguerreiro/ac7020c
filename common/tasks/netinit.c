@@ -16,9 +16,9 @@
 #include "xil_io.h"
 
 /* lwip */
-#include "lwip/dhcp.h"
 #include "lwip/sockets.h"
 #include "lwipopts.h"
+#include "lwip/dhcp.h"
 
 /* Logging config */
 #include "clogging/logging_levels.h"
@@ -37,16 +37,17 @@
 /*--------------------------------- Defines ---------------------------------*/
 //=============================================================================
 /* Ethernet settings */
-#define NETINIT_PLAT_EMAC_BASEADDR  XPAR_XEMACPS_0_BASEADDR
-
-#define NETINIT_CONFIG_THREAD_STACK_SIZE_DEFAULT        2048
-#define NETINIT_CONFIG_THREAD_PRIO_DEFAULT              DEFAULT_THREAD_PRIO
+#define NETINIT_PLAT_EMAC_BASEADDR                  XPAR_XEMACPS_0_BASEADDR
+#define NETINIT_CONFIG_THREAD_STACK_SIZE_DEFAULT    2048
+#define NETINIT_CONFIG_THREAD_PRIO_DEFAULT          DEFAULT_THREAD_PRIO
 
 typedef struct{
     /* Server netif */
     struct netif servernetif;
+
 }netinitControl_t;
 //=============================================================================
+
 
 //=============================================================================
 /*--------------------------------- Globals ---------------------------------*/
@@ -110,7 +111,7 @@ void netinit(void *param){
         mscnt += DHCP_FINE_TIMER_MSECS;
 
         if (mscnt >= DHCP_COARSE_TIMER_SECS * 2000) {
-            LogWarn(( "DHCP request timed out. Configuring default ip of 192.168.0.10" ));
+            LogError(( "DHCP request timed out. Configuring default ip of 192.168.0.10" ));
             IP4_ADDR(&(netif->ip_addr),  192, 168, 0, 10);
             IP4_ADDR(&(netif->netmask), 255, 255, 255,  0);
             IP4_ADDR(&(netif->gw),  192, 168, 0, 1);
@@ -152,20 +153,20 @@ static void netinitNetworkThread(void *p){
     (void)p;
 
     struct netif *netif;
-    uint32_t dnaLow, dnaHigh;
+    // uint32_t dnaLow, dnaHigh;
 
     /* The mac address of the board. this should be unique per board */
-    unsigned char mac[6];
+    unsigned char mac[6] = {0x00, 0x11, 0x13, 0x57, 0x3a, 0xf3};
     ip_addr_t ipaddr, netmask, gw;
 
-    dnaLow  = 0x00112233;
-    dnaHigh = 0x44556677;
-    mac[0] = (char)(  dnaHigh & 0xFF );
-    mac[1] = (char)( (dnaHigh & 0xFF00) >> 8 );
-    mac[2] = (char)( (dnaHigh & 0xFF0000) >> 16 );
-    mac[3] = (char)( (dnaHigh & 0xFF000000) >> 24 );
-    mac[4] = (char)(  dnaLow  & 0xFF );
-    mac[5] = (char)( (dnaLow  & 0xFF00) >> 8 );
+    // dnaLow = Xil_In32(NETINIT_DNA_BASEADDR);
+    // dnaHigh = Xil_In32(NETINIT_DNA_BASEADDR + 4);
+    // mac[0] = (char)(  dnaHigh & 0xFF );
+    // mac[1] = (char)( (dnaHigh & 0xFF00) >> 8 );
+    // mac[2] = (char)( (dnaHigh & 0xFF0000) >> 16 );
+    // mac[3] = (char)( (dnaHigh & 0xFF000000) >> 24 );
+    // mac[4] = (char)(  dnaLow  & 0xFF );
+    // mac[5] = (char)( (dnaLow  & 0xFF00) >> 8 );
     LogInfo((
         "Board MAC: %X:%X:%X:%X:%X:%X",
         mac[0], mac[1], mac[2], mac[3], mac[4], mac[5]
@@ -195,8 +196,8 @@ static void netinitNetworkThread(void *p){
     /* start packet receive thread - required for lwIP operation */
     sys_thread_new(
         "xemacif_input_thread", (void(*)(void*))xemacif_input_thread, netif,
-        NETINIT_CONFIG_THREAD_STACK_SIZE_DEFAULT,
-        NETINIT_CONFIG_THREAD_PRIO_DEFAULT
+                   NETINIT_CONFIG_THREAD_STACK_SIZE_DEFAULT,
+                   NETINIT_CONFIG_THREAD_PRIO_DEFAULT
     );
 
     dhcp_start(netif);
