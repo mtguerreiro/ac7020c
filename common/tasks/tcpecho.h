@@ -1,6 +1,6 @@
 
-#ifndef TASKS_NETINIT_H_
-#define TASKS_NETINIT_H_
+#ifndef TASKS_TCP_ECHO_H_
+#define TASKS_TCP_ECHO_H_
 
 //=============================================================================
 /*-------------------------------- Includes ---------------------------------*/
@@ -12,19 +12,16 @@
 //=============================================================================
 /*--------------------------------- Defines ---------------------------------*/
 //=============================================================================
-#define NETINIT_CONFIG_TASK_PRIO        2
-#define NETINIT_CONFIG_TASK_STACK_SIZE  2048
-
-typedef struct{
-    void (*onInit)(void);
-    const uint8_t *mac;
-}netinitParams_t;
+#define TCP_ECHO_CONFIG_TASK_PRIO               2
+#define TCP_ECHO_CONFIG_TASK_STACK_SIZE         2048
+#define TCP_ECHO_CONFIG_ECHO_BUF_SIZE_BYTES     128
+#define TCP_ECHO_CONFIG_SERVER_PORT             8080
 //=============================================================================
 
 //=============================================================================
 /*---------------------------------- Task -----------------------------------*/
 //=============================================================================
-void netinit(void *param);
+void tcpecho(void *param);
 //=============================================================================
 
-#endif /* TASKS_NETINIT_H_ */
+#endif /* TASKS_TCP_ECHO_H_ */

@@ -9,7 +9,7 @@
       "config": "src/UserConfigCpu0.cmake",
       "path_vars":{
         "TCP_SERVER_ECHO_SRC": "src",
-        "AC7020C_COMMON_TASKS": "../../common/tasks",
+        "AC7020C_COMMON": "../../common",
         "AC7020C_EXT_LIBS": "../../libs"
       },
       "include": "${TCP_SERVER_ECHO_SRC}/Cpu0.cmake"
