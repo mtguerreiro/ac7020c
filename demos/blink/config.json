@@ -2,7 +2,7 @@
   "xsa": "blink.xsa",
   "plat_name": "blink",
   "cpu0":{
-    "name": "cpu0_app",
+    "app_name": "cpu0_app",
     "template": "empty_application",
     "os": "standalone",
     "cmake":{
