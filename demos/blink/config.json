@@ -1,5 +1,5 @@
 {
-  "xsa": "blink.xsa",
+  "xsa": "block_design_wrapper.xsa",
   "plat_name": "blink",
   "cpu0":{
     "app_name": "cpu0_app",
@@ -7,7 +7,8 @@
     "os": "standalone",
     "cmake":{
       "path_vars":{
-        "BLINK_SRC": "src"
+        "BLINK_SRC": "src",
+        "AC7020C_EXT_LIBS": "../../libs"
       },
       "include": "${BLINK_SRC}/Cpu0.cmake"
     }

@@ -1,2 +1,14 @@
 
-set(USER_COMPILE_SOURCES "${BLINK_SRC}/blink.c")
+set(
+    USER_COMPILE_SOURCES
+    "${BLINK_SRC}/blink.c"
+    "${BLINK_SRC}/mvops_data.c"
+)
+
+list(
+    APPEND
+    USER_INCLUDE_DIRECTORIES
+    "${BLINK_SRC}"
+)
+
+list(APPEND USER_INCLUDE_DIRECTORIES "${AC7020C_EXT_LIBS}")
