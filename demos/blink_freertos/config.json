@@ -8,7 +8,7 @@
     "cmake":{
       "path_vars":{
         "BLINK_SRC": "src",
-        "AC7020C_COMMON_TASKS": "../../common/tasks"
+        "AC7020C_ROOT": "../.."
       },
       "include": "${BLINK_SRC}/Cpu0.cmake"
     },
