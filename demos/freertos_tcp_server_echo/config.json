@@ -10,7 +10,8 @@
       "path_vars":{
         "TCP_SERVER_ECHO_SRC": "src",
         "AC7020C_COMMON": "../../common",
-        "AC7020C_EXT_LIBS": "../../libs"
+        "AC7020C_EXT_LIBS": "../../libs",
+        "Z7_TASKS_COMMON": "../../xil_z7_scripts/tasks"
       },
       "include": "${TCP_SERVER_ECHO_SRC}/Cpu0.cmake"
     },
